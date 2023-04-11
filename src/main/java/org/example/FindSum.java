@@ -9,19 +9,40 @@ import java.util.Map;
 public class FindSum {
 
     public static void main(String[] args) {
-//        System.out.println(Arrays.toString(findSum(
-//                new int[]{10, 2, 4, 1, 4, -5, 7, 8, 11, 7}, 14)));
+        System.out.println(Arrays.toString(findSum4(
+                new int[]{10, 2, 4, 1, 4, -5, 7, 8, 11, 7}, 14))); // 0 2
 
-//        System.out.println(Arrays.toString(findSum1(
-//                new int[]{3, 2, 4}, 6)));
+        System.out.println(Arrays.toString(findSum4(
+                new int[]{3, 2, 4}, 6))); // 1 2
 
-        System.out.println(Arrays.toString(findSum3(
-                new int[]{3, 3}, 6)));
-        System.out.println(Arrays.toString(findSum3(
-                new int[]{2,7,11,15}, 9)));
+        System.out.println(Arrays.toString(findSum4(
+                new int[]{3, 3}, 6)));  // 0 1
+        System.out.println(Arrays.toString(findSum4(
+                new int[]{2,7,11,15}, 9))); // 0 1
 
     }
 
+
+    // for values only - not for indices
+    private static int[] findSum4(int[] nums, int target) {
+
+        int[] sorted = Arrays.copyOf(nums, nums.length);
+        Arrays.sort(sorted);
+
+        int left = 0;
+        int right = nums.length - 1;
+        while (left < right) {
+            if (nums[left] + nums[right] == target) {
+                return new int[]{nums[left], nums[right]};
+            }
+            if (nums[left] + nums[right] > target) {
+                right--;
+            } else {
+                left++;
+            }
+        }
+        return new int[]{};
+    }
 
     private static int[] findSum3(int[] nums, int target) {
         Map<Integer, Integer> numbers = new HashMap<>();
