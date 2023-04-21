@@ -30,6 +30,8 @@ public class TournamentWinners {
 
     public static String getWinners(String[][] competitions, int[] result) {
         Map<String, Integer> resultMap = new HashMap<>();
+        String winnerTeam = competitions[0][0];
+        Integer highScore = result[0];
         for (int i = 0; i < competitions.length; i++) {
             String[] competition = competitions[i];
             int matchResult = result[i];
