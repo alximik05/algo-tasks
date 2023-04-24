@@ -1,5 +1,6 @@
 package org.example;
 
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Semaphore;
 
 public class PrintInOrder {
@@ -23,6 +24,30 @@ public class PrintInOrder {
 
     public void third(Runnable printThird) throws InterruptedException {
         run3.acquire();
+        printThird.run();
+    }
+}
+
+class PrintInOrder2 {
+
+    CountDownLatch second = new CountDownLatch(1);
+    CountDownLatch third = new CountDownLatch(1);
+
+
+
+    public void first(Runnable printFirst) throws InterruptedException {
+        printFirst.run();
+        second.countDown();
+    }
+
+    public void second(Runnable printSecond) throws InterruptedException {
+        second.await();
+        printSecond.run();
+        third.countDown();
+    }
+
+    public void third(Runnable printThird) throws InterruptedException {
+        third.await();
         printThird.run();
     }
 }
