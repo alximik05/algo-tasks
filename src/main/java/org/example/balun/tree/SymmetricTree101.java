@@ -38,7 +38,7 @@ public class SymmetricTree101 {
         if (first == null && second == null) {
             return true;
         }
-        if(first == null ^ second == null) {
+        if(first == null || second == null) {
             return false;
         }
         if (first.val != second.val) {
