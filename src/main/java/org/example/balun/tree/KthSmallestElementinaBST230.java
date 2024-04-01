@@ -23,6 +23,28 @@ public class KthSmallestElementinaBST230 {
     }
 
 
+    /*
+    int count = 0;
+    int res = 0;
+    public int kthSmallest(TreeNode root, int k) {
+        traverse(root, k);
+        return res;
+    }
+
+    void traverse(TreeNode node, int k) {
+        if (node == null) {
+            return;
+        }
+
+        traverse(node.left, k);
+        count++;
+        if (k == count) {
+            res = node.val;
+        }
+        traverse(node.right, k);
+    }*/
+
+
 
 
 }
