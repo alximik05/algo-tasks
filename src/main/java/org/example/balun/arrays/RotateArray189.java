@@ -5,9 +5,8 @@ import java.util.Arrays;
 public class RotateArray189 {
     public static void main(String[] args) {
 
-        System.out.println(2 % 3);
-//        System.out.println(Arrays.toString(rotate2(new int[]{1, 2, 3, 4, 5, 6, 7}, 2)));
-        System.out.println(Arrays.toString(rotate2(new int[]{1,2}, 2)));
+        System.out.println(Arrays.toString(rotate3(new int[]{1, 2, 3, 4, 5, 6, 7}, 2)));
+        System.out.println(Arrays.toString(rotate3(new int[]{1,2}, 2)));
                 ;
 
 //{1, 2, 3, 4, 5,| 6, 7}
@@ -23,6 +22,28 @@ public class RotateArray189 {
 
 
     }
+
+    static public int[] rotate3(int[] nums, int k) {
+        k = k % nums.length;
+        reverse(nums, 0, nums.length - 1);
+        reverse(nums, 0, k - 1);
+        reverse(nums, k, nums.length - 1);
+
+        return nums;
+
+    }
+
+    static void reverse(int[] nums, int begin, int end) {
+        while (begin < end) {
+            int tmp = nums[begin];
+            nums[begin] = nums[end];
+            nums[end] = tmp;
+            begin++;
+            end--;
+        }
+    }
+
+
 
 
 
