@@ -18,6 +18,10 @@ public class MergeIntervals56 {
 
     static public int[][] merge2(int[][] intervals) {
 
+        for (int i = 0; i < intervals.length; i++) {
+            
+        }
+
         List<int[]> res = new ArrayList<>();
         res.add(intervals[0]);
 

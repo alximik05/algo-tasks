@@ -3,8 +3,8 @@ package org.example.cracking_interview.array;
 public class RemoveWhitespaces {
 
     public static void main(String[] args) {
-        System.out.println(removeWhitespaces("Mr John   Smith    "));
-//        System.out.println(removeWhitespacesInPlace("Mr John   Smith    ".toCharArray(), "Mr John   Smith    ".length()));
+//        System.out.println(removeWhitespaces("Mr John   Smith    "));
+        System.out.println(removeWhitespacesInPlace("Mr John   Smith    ".toCharArray(), 15));
     }
 
     static String removeWhitespaces(String s) {
@@ -40,26 +40,31 @@ public class RemoveWhitespaces {
     }
 
 
-    static String removeWhitespacesInPlace(char[] str, int length) {
-        int spaceCount = 0, newLength, i;
-        for (i = 0; i < length; i++) {
-            if (str[i] == ' ') {
+    static String removeWhitespacesInPlace(char[] chars, int len) {
+        if (chars == null) {
+            return "";
+        }
+        int spaceCount = 0;
+        int index = 0;
+        // first loop, locate last position
+        for (int i = 0; i < len; i++) {
+            if (chars[i] == ' ') {
                 spaceCount++;
             }
         }
-        newLength = length + spaceCount * 2;
-        str[newLength] = '\0';
-        for (i = length - 1; i >= 0; i--) {
-            if (str[i] == ' ') {
-                str[newLength - 1] = '0';
-                str[newLength - 2] = '2';
-                str[newLength - 3] = '%';
-                newLength = newLength - 3;
+        index = len + spaceCount * 2 - 1;
+        // second loop, replace spaces from the end
+        for (int i = len - 1; i >= 0; i--) {
+            if (chars[i] == ' ') {
+                chars[index] = '0';
+                chars[index - 1] = '2';
+                chars[index - 2] = '%';
+                index -= 3;
             } else {
-                str[newLength - 1] = str[i];
-                newLength = newLength - 1;
+                chars[index] = chars[i];
+                index--;
             }
         }
-        return new String(str);
+        return new String(chars).trim();
     }
 }

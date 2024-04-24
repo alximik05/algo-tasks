@@ -1,6 +1,7 @@
 package org.example.balun.stack;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 public class ValidParentheses20 {
@@ -24,4 +25,33 @@ public class ValidParentheses20 {
         }
         return strings.isEmpty();
     }
+
+    static public boolean isValid2(String s) {
+        Stack<Character> brackets = new Stack<>();
+        Map<Character, Character> brackMap = Map.of(
+                '[', ']',
+                '{', '}',
+                '(', ')'
+        );
+
+        char[] charArray = s.toCharArray();
+
+        for (char c : charArray) {
+            if (brackMap.containsKey(c)) {
+                brackets.push(c);
+                continue;
+            }
+
+            if (brackets.isEmpty()) {
+                return false;
+            }
+            Character last = brackets.pop();
+            if (brackMap.get(last) != c) {
+                return false;
+            }
+        }
+        return brackets.isEmpty();
+    }
 }
+
+
