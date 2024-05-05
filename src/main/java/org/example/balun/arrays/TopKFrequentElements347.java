@@ -25,7 +25,6 @@ public class TopKFrequentElements347 {
 
     static public int[] topKFrequent(int[] nums, int k) {
         Map<Integer, Integer> map = new HashMap<>();
-
         for (int num : nums) {
             if (map.containsKey(num)) {
                 Integer count = map.get(num);
@@ -35,21 +34,17 @@ public class TopKFrequentElements347 {
                 map.put(num, 1);
             }
         }
-
-
-
         Queue<Map.Entry<Integer, Integer>> queue = new PriorityQueue<>((o1, o2) -> o2.getValue() - o1.getValue());
-        queue.addAll(map.entrySet());
-
-
-        List<Integer> result = new ArrayList<>();
-
-        while (k > 0) {
-            result.add(queue.poll().getKey());
-            k--;
+        for (Map.Entry<Integer, Integer> integerIntegerEntry : map.entrySet()) {
+            queue.add(integerIntegerEntry);
         }
-        return result.stream().mapToInt(i -> i).toArray();
+        int[] result = new int[k];
+        for (int i = 0; i < k; i++) {
+            result[i] = queue.poll().getKey();
+        }
+        return result;
     }
+
 
 
     static public int[] topKFrequent2(int[] nums, int k) {
